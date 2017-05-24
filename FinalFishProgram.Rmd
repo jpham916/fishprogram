@@ -1,0 +1,20 @@
+---
+title: "FishProgram"
+author: "jpham916"
+date: "May 24, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r}
+FishPrices <- read.csv("FishPrices.txt", header= TRUE)
+
+Fishlocations <- read.csv("Fishsite.txt", header= TRUE)
+
+mergedfish <- merge(Fishlocations,FishPrices,by=c ("Fish"))
+
+mergedfish
+```
