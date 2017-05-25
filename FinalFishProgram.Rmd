@@ -9,12 +9,26 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-``` {r}
-FishPrices <- read.csv("FishPrices.txt", header= TRUE)
+```{r generateData, echo = FALSE}
+#Generate fish vector 
+possibleFish <- c("Cod", "Haddock", "Salmon", "Trout", "Tilapia")
+nfish <- NROW(possibleFish)
+  
+#Generate Price Table
+Prices <- round(runif(nfish,3,10),2)
+PriceTable <- cbind(possibleFish, Prices)
+colnames(PriceTable) <- c("Fish", "$/lb")
+write.csv(PriceTable,"FishPrices.txt",row.names = FALSE)
+  
+#Generate Location Frequency Table  
+Location1 <- round(runif(nfish,3,50),0)
+Location2 <- round(runif(nfish,3,50),0)
+Location3 <- round(runif(nfish,3,50),0)
+  
+SiteTable <- cbind(possibleFish, Location1, Location2, Location3)
+colnames(SiteTable) <- c("Fish", "Alaska", "Frewfarms", "Taguetown")
+  
+write.csv(SiteTable,"Fishsite.txt", row.names = FALSE)
 
-Fishlocations <- read.csv("Fishsite.txt", header= TRUE)
-
-mergedfish <- merge(Fishlocations,FishPrices,by=c ("Fish"))
-
-mergedfish
 ```
+
